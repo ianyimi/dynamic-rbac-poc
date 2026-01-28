@@ -9,6 +9,7 @@ import { UserManagementCard } from '~/components/user-management-card'
 import { UserSwitcher } from '~/components/user-switcher'
 import { useActiveUser } from '~/lib/auth/context'
 import { usePermissions } from '~/lib/auth/permissions'
+import { cn } from '~/lib/utils'
 
 export const Route = createFileRoute('/')({ component: Dashboard })
 
@@ -31,8 +32,7 @@ function Dashboard() {
       {/* Right Panel */}
       <div className="overflow-hidden p-6">
         <div
-          className={`grid grid-cols-1 gap-4 lg:grid-cols-2 ${!activeUserId ? 'pointer-events-none opacity-50' : ''
-            }`}
+          className={cn("grid grid-cols-1 gap-4 lg:grid-cols-2", !activeUserId && "pointer-events-none opacity-50")}
         >
           <TelemetryCard permissions={permissions} />
           <MissionReportsCard permissions={permissions} />
