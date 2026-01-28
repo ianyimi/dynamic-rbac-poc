@@ -8,15 +8,15 @@
  * @module
  */
 
-import type * as auth_adapter_index from "../auth/adapter/index.js";
-import type * as auth_adapter_utils from "../auth/adapter/utils.js";
-import type * as auth_api from "../auth/api.js";
-import type * as auth_config from "../auth/config.js";
-import type * as auth_db from "../auth/db.js";
-import type * as auth_index from "../auth/index.js";
-import type * as auth_plugins_index from "../auth/plugins/index.js";
-import type * as auth_sessions from "../auth/sessions.js";
 import type * as http from "../http.js";
+import type * as lib_permissions from "../lib/permissions.js";
+import type * as mission_reports from "../mission_reports.js";
+import type * as permissions from "../permissions.js";
+import type * as roles from "../roles.js";
+import type * as seed from "../seed.js";
+import type * as system_logs from "../system_logs.js";
+import type * as telemetry_data from "../telemetry_data.js";
+import type * as users from "../users.js";
 
 import type {
   ApiFromModules,
@@ -25,15 +25,15 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  "auth/adapter/index": typeof auth_adapter_index;
-  "auth/adapter/utils": typeof auth_adapter_utils;
-  "auth/api": typeof auth_api;
-  "auth/config": typeof auth_config;
-  "auth/db": typeof auth_db;
-  "auth/index": typeof auth_index;
-  "auth/plugins/index": typeof auth_plugins_index;
-  "auth/sessions": typeof auth_sessions;
   http: typeof http;
+  "lib/permissions": typeof lib_permissions;
+  mission_reports: typeof mission_reports;
+  permissions: typeof permissions;
+  roles: typeof roles;
+  seed: typeof seed;
+  system_logs: typeof system_logs;
+  telemetry_data: typeof telemetry_data;
+  users: typeof users;
 }>;
 
 /**

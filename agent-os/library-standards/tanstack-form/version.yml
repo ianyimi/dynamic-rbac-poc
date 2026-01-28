@@ -1,0 +1,7 @@
+library: "@tanstack/react-form"
+current_major: 1
+current_minor: 28
+last_updated: 2026-01-27
+docs_source: https://tanstack.com/form/latest
+llms_txt_url: https://tanstack.com/form/latest/llms.txt
+best_practices_source: https://tanstack.com/form/latest/docs/framework/react/guides/basic-concepts

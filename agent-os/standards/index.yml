@@ -1,0 +1,49 @@
+# Standards Index - Web Application (RBAC POC)
+
+frontend:
+  component-patterns:
+    description: React component structure, naming, exports, and composition conventions
+    source: use-case
+  ui-layout:
+    description: Single-page dashboard layout with two-column control panel and resource cards
+    source: use-case
+  react:
+    description: React 19 best practices -- hooks rules, Actions, use() API, refs as props
+    source: library
+  shadcn-ui:
+    description: shadcn/ui v3.x patterns -- Base UI primitives, CLI usage, data-slot attributes
+    source: library
+  tanstack-form:
+    description: TanStack React Form v1 -- useForm, field components, Zod validation via Standard Schema
+    source: library
+  tanstack-router:
+    description: TanStack Router v1 -- file-based routing, loaders, route context
+    source: library
+  tanstack-start:
+    description: TanStack Start v1 -- SSR framework, server functions, deployment
+    source: library
+  tailwind:
+    description: Tailwind CSS v4 -- utility patterns, theming, CSS variables
+    source: library
+
+backend:
+  convex-schema:
+    description: RBAC data model design -- resources, roles, permissions, users tables
+    source: use-case
+  permission-engine:
+    description: Two-tier permission evaluation -- system constraints, role merging, server enforcement
+    source: use-case
+  convex:
+    description: Convex v1.31 best practices -- schema, queries, mutations, real-time, authorization
+    source: library
+
+global:
+  tech-stack:
+    description: Project tech stack reference -- TanStack Start, Convex, shadcn, Vercel
+    source: use-case
+  project-conventions:
+    description: TypeScript conventions, file naming, import patterns, export rules
+    source: use-case
+  zod:
+    description: Zod 4 best practices -- schema validation, Standard Schema, type inference
+    source: library

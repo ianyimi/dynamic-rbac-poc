@@ -6,17 +6,13 @@ import { nitro } from 'nitro/vite'
 import { defineConfig } from 'vite'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 
-// Validate environment variables at build time
-import './src/env'
-
 const config = defineConfig({
   server: {
-    port: 3000
+    port: 3010,
   },
   plugins: [
     devtools(),
     nitro(),
-    // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
@@ -24,9 +20,6 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
-  ssr: {
-    noExternal: ["@convex-dev/better-auth"]
-  }
 })
 
 export default config

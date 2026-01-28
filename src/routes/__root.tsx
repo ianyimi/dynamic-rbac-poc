@@ -1,22 +1,16 @@
-import { QueryClient } from "@tanstack/react-query"
-import { createRootRouteWithContext, Outlet } from "@tanstack/react-router"
+import type { ConvexQueryClient } from '@convex-dev/react-query'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { HeadContent, Scripts } from '@tanstack/react-router'
+import { type QueryClient } from '@tanstack/react-query'
+import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import type { ConvexQueryClient } from "@convex-dev/react-query"
-import { Providers } from "~/providers"
-import { ThemeProvider, getThemeServerFn } from "~/lib/theme"
+
+import { getThemeServerFn, ThemeProvider } from '~/lib/theme'
+import { Providers } from '~/providers'
 
 import appCss from '../styles.css?url'
-import { createServerFn } from "@tanstack/react-start"
-import { getToken } from "~/lib/auth/server"
-
-const getAuth = createServerFn().handler(async () => {
-  return await getToken()
-})
 
 export const Route = createRootRouteWithContext<{
-  queryClient: QueryClient,
+  queryClient: QueryClient
   convexQueryClient: ConvexQueryClient
 }>()({
   head: () => ({
@@ -29,7 +23,7 @@ export const Route = createRootRouteWithContext<{
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Dynamic RBAC POC',
       },
     ],
     links: [
@@ -39,21 +33,11 @@ export const Route = createRootRouteWithContext<{
       },
     ],
   }),
-  beforeLoad: async (ctx) => {
-    const token = await getAuth()
-    if (token) {
-      ctx.context.convexQueryClient.serverHttpClient?.setAuth(token)
-    }
-    return {
-      isAuthenticated: !!token,
-      token
-    }
-  },
   loader: () => getThemeServerFn(),
 
   component: RootComponent,
   shellComponent: RootDocument,
-  notFoundComponent: NotFoundComponent
+  notFoundComponent: NotFoundComponent,
 })
 
 function RootComponent() {
@@ -69,9 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider theme={theme}>
-          <Providers>
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </ThemeProvider>
         <TanStackDevtools
           config={{
@@ -91,7 +73,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 }
 
 function NotFoundComponent() {
-  return (
-    <p>Not Found</p>
-  )
+  return <p>Not Found</p>
 }

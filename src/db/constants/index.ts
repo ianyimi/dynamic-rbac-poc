@@ -1,8 +1,7 @@
-export * from "./auth"
-
-// Better Auth
-export const TABLE_SLUG_USERS = "user" as const;
-export const TABLE_SLUG_ACCOUNTS = "account" as const;
-export const TABLE_SLUG_SESSIONS = "session" as const;
-export const TABLE_SLUG_VERIFICATIONS = "verification" as const;
-export const TABLE_SLUG_JWKS = "jwks" as const;
+export const TABLE_USERS = 'users' as const
+export const TABLE_RESOURCES = 'resources' as const
+export const TABLE_ROLES = 'roles' as const
+export const TABLE_PERMISSIONS = 'permissions' as const
+export const TABLE_TELEMETRY_DATA = 'telemetry_data' as const
+export const TABLE_MISSION_REPORTS = 'mission_reports' as const
+export const TABLE_SYSTEM_LOGS = 'system_logs' as const

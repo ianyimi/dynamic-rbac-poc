@@ -1,61 +1,61 @@
-import { Moon, Sun, SunMoon } from "lucide-react";
-import { type ComponentPropsWithRef } from "react";
+import { type ComponentPropsWithRef } from 'react'
+import { Moon, Sun, SunMoon } from 'lucide-react'
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuTrigger
-} from "~/components/ui/dropdown-menu";
-import { useTheme } from "~/lib/theme";
+  DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu'
+import { useTheme } from '~/lib/theme'
 
-export function ThemeToggle({ ...divProps }: ComponentPropsWithRef<"div">) {
+export function ThemeToggle({ ...divProps }: ComponentPropsWithRef<'div'>) {
   const { setTheme, userTheme } = useTheme()
 
   return (
     <div {...divProps}>
       <DropdownMenu>
         <DropdownMenuTrigger render={<Button size="icon" variant="outline" />}>
-          {userTheme === "system" ? (
+          {userTheme === 'system' ? (
             <SunMoon className="h-[1.2rem] w-[1.2rem]" />
           ) : (
             <>
-              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
             </>
           )}
           <span className="sr-only">Toggle theme</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuCheckboxItem
-            checked={userTheme === "light"}
-            disabled={userTheme === "light"}
+            checked={userTheme === 'light'}
+            disabled={userTheme === 'light'}
             onCheckedChange={(val) => {
               if (val) {
-                setTheme("light")
+                setTheme('light')
               }
             }}
           >
             Light
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
-            checked={userTheme === "dark"}
-            disabled={userTheme === "dark"}
+            checked={userTheme === 'dark'}
+            disabled={userTheme === 'dark'}
             onCheckedChange={(val) => {
               if (val) {
-                setTheme("dark")
+                setTheme('dark')
               }
             }}
           >
             Dark
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
-            checked={userTheme === "system"}
-            disabled={userTheme === "system"}
+            checked={userTheme === 'system'}
+            disabled={userTheme === 'system'}
             onCheckedChange={(val) => {
               if (val) {
-                setTheme("system")
+                setTheme('system')
               }
             }}
           >
@@ -63,6 +63,6 @@ export function ThemeToggle({ ...divProps }: ComponentPropsWithRef<"div">) {
           </DropdownMenuCheckboxItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div >
+    </div>
   )
 }

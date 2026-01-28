@@ -1,36 +1,38 @@
-import { AuthQueryProvider } from "@daveyplate/better-auth-tanstack"
-import { AuthUIProviderTanstack } from "@daveyplate/better-auth-ui/tanstack"
-import { Link, useRouter } from "@tanstack/react-router"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import type { ReactNode } from "react"
+import type { ReactNode } from 'react'
+import { ConvexQueryClient } from '@convex-dev/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ConvexProvider, ConvexReactClient } from 'convex/react'
+import { Toaster } from 'sonner'
 
-import { authClient } from "~/lib/auth/client"
+import { ActiveUserProvider } from '~/lib/auth/context'
+import { env } from '~/env'
 
-// Create a client
+const CONVEX_URL = env.VITE_CONVEX_URL!
+
+const convexClient = new ConvexReactClient(CONVEX_URL)
+
+const convexQueryClient = new ConvexQueryClient(convexClient)
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60
-    }
-  }
+      queryKeyHashFn: convexQueryClient.hashFn(),
+      queryFn: convexQueryClient.queryFn(),
+      staleTime: 1000 * 60,
+    },
+  },
 })
+convexQueryClient.connect(queryClient)
 
 export function Providers({ children }: { children: ReactNode }) {
-  const router = useRouter()
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthQueryProvider>
-        <AuthUIProviderTanstack
-          authClient={authClient}
-          credentials={true}
-          navigate={(href) => router.navigate({ href })}
-          replace={(href) => router.navigate({ href, replace: true })}
-          Link={({ href, ...props }) => <Link to={href} {...props} />}
-        >
+    <ConvexProvider client={convexClient}>
+      <QueryClientProvider client={queryClient}>
+        <ActiveUserProvider>
           {children}
-        </AuthUIProviderTanstack>
-      </AuthQueryProvider>
-    </QueryClientProvider>
+          <Toaster />
+        </ActiveUserProvider>
+      </QueryClientProvider>
+    </ConvexProvider>
   )
 }
