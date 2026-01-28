@@ -129,35 +129,6 @@ User list with role toggle buttons. Fetches `getRoleAssignmentConstraints` from 
 
 Clickable user list in the sidebar. Click to impersonate, click again to deselect. Shows role badges per user. Not permission-gated (anyone can switch users — this is a demo tool, not real auth).
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ and pnpm
-- A Convex account ([convex.dev](https://convex.dev))
-
-### Setup
-
-```bash
-pnpm install
-
-# Terminal 1: Convex dev server
-npx convex dev
-
-# Terminal 2: App dev server
-pnpm dev
-```
-
-Visit `http://localhost:3010`. The database auto-seeds if no users exist, or use the Convex dashboard to add data manually (see `seed-data.md`).
-
-### Environment
-
-Copy `.env.example` to `.env.local` and set:
-
-```env
-VITE_CONVEX_URL=https://your-deployment.convex.cloud
-```
-
 ## How It Works
 
 1. **Select a user** from the sidebar list to impersonate them
@@ -175,6 +146,18 @@ VITE_CONVEX_URL=https://your-deployment.convex.cloud
 - Admin role assignment is restricted to super admins only
 - Role/permission changes propagate instantly via Convex subscriptions
 - Text field edits are **debounced** (500ms) to avoid excessive mutations
+
+## Future Considerations
+
+Features considered but not implemented in this POC:
+
+- **Row-level permissions**: The original `hasPermission` pattern supports function-based checks (e.g., "users can only edit their own reports"). The current system operates at the resource-type level only. Adding row-level checks would mean extending `checkPermission` to accept a `data` parameter and storing permission functions or conditions in the database.
+- **Permission inheritance / role hierarchy**: Roles are flat — no parent/child relationships. A "Manager" role doesn't automatically include "Viewer" permissions. Each role's permissions are defined independently.
+- **Field-level permissions**: All fields in a resource are either editable or not. There's no concept of "can edit the title but not the classification."
+- **Temporal permissions**: No time-based access (e.g., "access expires after 30 days"). Would require a TTL or expiry field on user-role assignments.
+- **Audit logging**: No record of who changed what permission when. Would be straightforward to add as a Convex mutation wrapper that logs before/after state.
+- **Multi-tenancy / organization scoping**: The original webapp-v2 permissions file supports organization hierarchy checks (school/district/county). This POC has no org concept — all users see all data.
+- **Real authentication**: The user switcher is a demo tool. In production, the active user would come from a session/JWT, not a React state variable.
 
 ## Project Structure
 
@@ -205,17 +188,34 @@ convex/
   schema.ts             # Database schema
 ```
 
-## Future Considerations
+## Getting Started
 
-Features considered but not implemented in this POC:
+### Prerequisites
 
-- **Row-level permissions**: The original `hasPermission` pattern supports function-based checks (e.g., "users can only edit their own reports"). The current system operates at the resource-type level only. Adding row-level checks would mean extending `checkPermission` to accept a `data` parameter and storing permission functions or conditions in the database.
-- **Permission inheritance / role hierarchy**: Roles are flat — no parent/child relationships. A "Manager" role doesn't automatically include "Viewer" permissions. Each role's permissions are defined independently.
-- **Field-level permissions**: All fields in a resource are either editable or not. There's no concept of "can edit the title but not the classification."
-- **Temporal permissions**: No time-based access (e.g., "access expires after 30 days"). Would require a TTL or expiry field on user-role assignments.
-- **Audit logging**: No record of who changed what permission when. Would be straightforward to add as a Convex mutation wrapper that logs before/after state.
-- **Multi-tenancy / organization scoping**: The original webapp-v2 permissions file supports organization hierarchy checks (school/district/county). This POC has no org concept — all users see all data.
-- **Real authentication**: The user switcher is a demo tool. In production, the active user would come from a session/JWT, not a React state variable.
+- Node.js 18+ and pnpm
+- A Convex account ([convex.dev](https://convex.dev))
+
+### Setup
+
+```bash
+pnpm install
+
+# Terminal 1: Convex dev server
+npx convex dev
+
+# Terminal 2: App dev server
+pnpm dev
+```
+
+Visit `http://localhost:3010`. The database auto-seeds if no users exist, or use the Convex dashboard to add data manually (see `seed-data.md`).
+
+### Environment
+
+Copy `.env.example` to `.env.local` and set:
+
+```env
+VITE_CONVEX_URL=https://your-deployment.convex.cloud
+```
 
 ## Scripts
 
