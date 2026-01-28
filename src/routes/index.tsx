@@ -30,7 +30,7 @@ function Dashboard() {
       </div>
 
       {/* Right Panel */}
-      <div className="overflow-y-scroll p-2">
+      <div className="overflow-y-scroll p-4">
         <div
           className={cn("grid grid-cols-1 gap-4 lg:grid-cols-2", !activeUserId && "pointer-events-none opacity-50")}
         >
