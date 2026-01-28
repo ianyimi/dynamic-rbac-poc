@@ -20,7 +20,7 @@ function Dashboard() {
     <div className="fixed inset-0 grid grid-cols-[380px_1fr]">
       {/* Left Panel */}
       <div className="flex flex-col gap-6 overflow-y-auto border-r p-6">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <h1 className="text-lg font-semibold">Dynamic RBAC POC</h1>
           <ThemeToggle />
         </div>
