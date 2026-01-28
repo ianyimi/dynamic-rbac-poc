@@ -54,15 +54,17 @@ export function UserManagementCard({
   }
 
   return (
-    <Card size="sm">
-      <CardHeader>
+    <Card size="sm" className="flex h-120 flex-col">
+      <CardHeader className="shrink-0">
         <CardTitle>User Management</CardTitle>
       </CardHeader>
-      <CardContent className="overflow-y-scroll max-h-125">
+      <CardContent className="flex-1 overflow-y-auto">
         {!canRead ? (
-          <div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
-            <Lock className="text-muted-foreground size-8" />
-            <span className="text-muted-foreground text-sm">No access</span>
+          <div className="grid place-items-center h-full py-8 text-center">
+            <div className="flex flex-col items-center">
+              <Lock className="text-muted-foreground size-8" />
+              <span className="text-muted-foreground text-sm">No access</span>
+            </div>
           </div>
         ) : !users || !roles ? (
           <div className="text-muted-foreground py-4 text-center text-sm">Loading...</div>
@@ -91,11 +93,10 @@ export function UserManagementCard({
                         type="button"
                         onClick={() => toggleRole(user._id, role._id, user.roleIds)}
                         disabled={locked}
-                        className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-                          hasRole
-                            ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300'
-                            : 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300'
-                        } ${locked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:opacity-80'}`}
+                        className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${hasRole
+                          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300'
+                          } ${locked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:opacity-80'}`}
                       >
                         {role.name}
                       </button>

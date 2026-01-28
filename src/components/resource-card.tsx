@@ -125,8 +125,8 @@ export function ResourceCard<T extends { _id: string }>({
   }
 
   return (
-    <Card size="sm">
-      <CardHeader>
+    <Card size="sm" className="flex h-120 flex-col">
+      <CardHeader className="shrink-0">
         <CardTitle>{label}</CardTitle>
         <CardAction>
           <Button
@@ -139,7 +139,7 @@ export function ResourceCard<T extends { _id: string }>({
           </Button>
         </CardAction>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 overflow-y-auto">
         {showAddForm && (
           <div className="mb-3 flex flex-col gap-2 rounded-md border p-2">
             {fieldConfigs.map((field) => (
@@ -176,9 +176,11 @@ export function ResourceCard<T extends { _id: string }>({
           </div>
         )}
         {!canRead ? (
-          <div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
-            <Lock className="text-muted-foreground size-8" />
-            <span className="text-muted-foreground text-sm">No access</span>
+          <div className="grid place-items-center h-full py-8 text-center">
+            <div className="flex flex-col gap-2 items-center">
+              <Lock className="text-muted-foreground size-8" />
+              <span className="text-muted-foreground text-sm">No access</span>
+            </div>
           </div>
         ) : entries === null || entries === undefined ? (
           <div className="text-muted-foreground py-4 text-center text-sm">Loading...</div>

@@ -5,26 +5,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
---background: 100% 0 0;
---foreground: 3.9% 0.006 240;
---card: 100% 0 0;
---card-foreground: 3.9% 0.006 240;
---popover: 100% 0 0;
---popover-foreground: 3.9% 0.006 240;
---primary: 10% 0.003 240;
---primary-foreground: 98% 0 0;
---secondary: 95.9% 0.002 240;
---secondary-foreground: 10% 0.003 240;
---muted: 95.9% 0.002 240;
---muted-foreground: 46.1% 0.002 240;
---accent: 95.9% 0.002 240;
---accent-foreground: 10% 0.003 240;
---destructive: 60.2% 0.168 0;
---destructive-foreground: 98% 0 0;
---border: 90% 0.003 240;
---input: 90% 0.003 240;
---ring: 10% 0.003 240;
---radius: 0.5rem;
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.039 0.006 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.039 0.006 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.039 0.006 240);
+  --primary: oklch(0.1 0.003 240);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.959 0.002 240);
+  --secondary-foreground: oklch(0.1 0.003 240);
+  --muted: oklch(0.959 0.002 240);
+  --muted-foreground: oklch(0.461 0.002 240);
+  --accent: oklch(0.959 0.002 240);
+  --accent-foreground: oklch(0.1 0.003 240);
+  --destructive: oklch(0.602 0.168 0);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.9 0.003 240);
+  --input: oklch(0.9 0.003 240);
+  --ring: oklch(0.1 0.003 240);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: oklch(0.039 0.006 240);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.039 0.006 240);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.039 0.006 240);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.1 0.003 240);
+  --secondary: oklch(0.149 0.006 240);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.149 0.006 240);
+  --muted-foreground: oklch(0.639 0.003 240);
+  --accent: oklch(0.149 0.006 240);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.602 0.168 0);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.3 0.006 240);
+  --input: oklch(0.3 0.006 240);
+  --ring: oklch(0.839 0.003 240);
+}
 
 @theme inline {
   --font-sans: 'Inter Variable', sans-serif;
@@ -71,6 +95,18 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-color: var(--muted-foreground) var(--background);
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--muted-foreground);
+    border-radius: 4px;
   }
   body {
     @apply bg-background text-foreground font-sans overflow-hidden;
