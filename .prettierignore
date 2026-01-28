@@ -1,0 +1,18 @@
+# Build outputs
+dist
+.output
+.nitro
+.tanstack
+
+# Auto-generated files
+**/routeTree.gen.ts
+**/*.gen.ts
+
+# Dependencies
+node_modules
+
+# Cache
+.eslintcache
+
+# Lock files
+pnpm-lock.yaml
