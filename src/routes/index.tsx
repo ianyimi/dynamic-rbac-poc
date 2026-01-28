@@ -1,9 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Github } from 'lucide-react'
 
 import { MissionReportsCard } from '~/components/mission-reports-card'
 import { RoleManager } from '~/components/role-manager'
 import { SystemLogsCard } from '~/components/system-logs-card'
 import { TelemetryCard } from '~/components/telemetry-card'
+import { Button } from '~/components/ui/button'
 import { ThemeToggle } from '~/components/ui/theme-toggle'
 import { UserManagementCard } from '~/components/user-management-card'
 import { UserSwitcher } from '~/components/user-switcher'
@@ -23,7 +25,14 @@ function Dashboard() {
       <div className="flex flex-col gap-6 overflow-y-auto border-r p-6">
         <div className="flex justify-between items-center">
           <h1 className="text-lg font-semibold">Dynamic RBAC POC</h1>
-          <ThemeToggle />
+          <div className="flex gap-2">
+            <a href="https://github.com/ianyimi/dynamic-rbac-poc" target="_blank" rel="noopener noreferrer">
+              <Button size="icon" variant="outline">
+                <Github className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </a>
+            <ThemeToggle />
+          </div>
         </div>
         <UserSwitcher />
         <RoleManager permissions={permissions} />
